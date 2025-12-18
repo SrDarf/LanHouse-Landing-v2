@@ -4,6 +4,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const mascotContainer = document.getElementById("mascot-container")
   const mascotImage = document.getElementById("mascot-image")
 
+  const isMobile = window.matchMedia("(max-width: 1023px)").matches
+
   const CONFIG = {
     minSize: 18,
     maxSize: 28,
@@ -12,11 +14,11 @@ document.addEventListener("DOMContentLoaded", () => {
     minDuration: 25,
     maxDuration: 45,
     spawnInterval: 500,
-    maxLights: 50,
+    maxLights: isMobile ? 5 : 25,
     fadeInDuration: 1500,
     windChance: 0.8,
-    minWindDrift: 100,
-    maxWindDrift: 1000,
+    minWindDrift: isMobile ? 10 : 100,
+    maxWindDrift: isMobile ? 200 : 1000,
   }
 
   let activeDynamicLights = []
@@ -161,8 +163,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const PROXIMITY_THRESHOLD = 500
   const MAX_ROTATION = 15
   const MAX_MOVE = 30
-
-  const isMobile = window.matchMedia("(max-width: 1023px)").matches
 
   if (mascotContainer && !isMobile) {
     let targetX = 0
